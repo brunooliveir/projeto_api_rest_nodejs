@@ -8,7 +8,7 @@ module.exports = {
         return model.create(cities)
     },
     async catchForName(name) {
-        const finded = await model.findOne({
+        const finded = await model.findAll({
             where: {
                 name: name
             }
@@ -21,7 +21,7 @@ module.exports = {
         return finded
     },
     async catchForState(state) {
-        const finded = await model.findOne({
+        const finded = await model.findAll({
             where: {
                 state: state
             }

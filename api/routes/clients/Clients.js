@@ -29,18 +29,6 @@ class Clients {
         this.version = result.version
     }
 
-    async loadWithName() {
-        const finded = await tableClients.catchForName(this.full_name)
-        this.id = finded.id
-        this.full_name = finded.full_name
-        this.gender = finded.gender
-        this.date_of_birth = finded.date_of_birth
-        this.age = finded.age
-        this.city = finded.city
-        this.createdAt = finded.createdAt
-        this.updatedAt = finded.updatedAt
-        this.version = finded.version
-    }
 
     async loadWithId() {
         const finded = await tableClients.catchForId(this.id)

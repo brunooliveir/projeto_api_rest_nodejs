@@ -23,26 +23,6 @@ class Cities {
         this.version = result.version
     }
 
-    async loadWithName() {
-        const finded = await tableCities.catchForName(this.name)
-        this.id = finded.id
-        this.name = finded.name
-        this.state = finded.state
-        this.createdAt = finded.createdAt
-        this.updatedAt = finded.updatedAt
-        this.version = finded.version
-    }
-
-    async loadWithState() {
-        const finded = await tableCities.catchForState(this.state)
-        this.id = finded.id
-        this.name = finded.name
-        this.state = finded.state
-        this.createdAt = finded.createdAt
-        this.updatedAt = finded.updatedAt
-        this.version = finded.version
-    }
-
     validate() {
         const fields = ['name', 'state']
 

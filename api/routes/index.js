@@ -38,8 +38,7 @@ router.get('/cities', async(request, response) => {
 router.get('/cities/name=:name', async(request, response) => {
     try {
         const name = request.params.name
-        const cities = new Cities({ name: name })
-        await cities.loadWithName()
+        const cities = await tableCities.catchForName(name)
         response.status(200)
         response.send(
             JSON.stringify(cities)
@@ -54,11 +53,13 @@ router.get('/cities/name=:name', async(request, response) => {
     }
 })
 
+
+
+
 router.get('/cities/state=:state', async(request, response) => {
     try {
         const state = request.params.state
-        const cities = new Cities({ state: state })
-        await cities.loadWithState()
+        const cities = await tableCities.catchForState(state)
         response.status(200)
         response.send(
             JSON.stringify(cities)
@@ -72,6 +73,8 @@ router.get('/cities/state=:state', async(request, response) => {
         )
     }
 })
+
+
 
 
 //Cadastro, consulta, modificacao e remocao de clientes 
@@ -143,10 +146,10 @@ router.get('/clients', async(request, response) => {
 router.get('/clients/name=:name', async(request, response) => {
     try {
         const name = request.params.name
-        const clients = new Clients({ full_name: name })
-        await clients.loadWithName()
+        const client = await tableClients.catchForName(name)
+        response.status(200)
         response.send(
-            JSON.stringify(clients)
+            JSON.stringify(client)
         )
     } catch (error) {
         response.send(
@@ -156,6 +159,10 @@ router.get('/clients/name=:name', async(request, response) => {
         )
     }
 })
+
+
+
+
 
 router.get('/clients/:idClient', async(request, response) => {
     try {

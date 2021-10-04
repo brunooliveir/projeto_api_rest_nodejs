@@ -8,7 +8,7 @@ module.exports = {
         return model.create(clients)
     },
     async catchForName(name) {
-        const finded = await model.findOne({
+        const finded = await model.findAll({
             where: {
                 full_name: name
             }
@@ -47,7 +47,7 @@ module.exports = {
             }
         })
     }
-    
+
 
 
 }
