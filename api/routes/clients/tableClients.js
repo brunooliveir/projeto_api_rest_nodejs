@@ -32,6 +32,22 @@ module.exports = {
         }
 
         return finded
+    },
+    changeName(id, dataForRefresh) {
+        return model.update(
+            dataForRefresh, {
+                where: { id: id }
+            }
+        )
+    },
+    removeClient(id) {
+        return model.destroy({
+            where: {
+                id: id
+            }
+        })
     }
+    
+
 
 }

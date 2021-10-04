@@ -14,6 +14,7 @@ class Clients {
     }
 
     async create() {
+        this.validate()
         const result = await tableClients.insert({
             full_name: this.full_name,
             gender: this.gender,
@@ -54,7 +55,47 @@ class Clients {
         this.version = finded.version
     }
 
+    async changeName() {
+        await tableClients.catchForId(this.id)
+        const nextName = ['full_name']
+        const dataForRefresh = {}
 
+        nextName.forEach((slot) => {
+            const value = this[slot]
+            if (typeof value === 'string' && value.length > 0) {
+                dataForRefresh[slot] = value
+            }
+        })
+        if (Object.keys(dataForRefresh).length === 0) {
+            throw new Error('It has no name to replace')
+        }
+
+        await tableClients.changeName(this.id, dataForRefresh)
+    }
+
+    async removeClient() {
+        return tableClients.removeClient(this.id)
+    }
+
+    validate() {
+        const fieldsString = ['full_name']
+        const fieldsNumber = ['age']
+
+        fieldsNumber.forEach(fieldNumber => {
+            const value = this[fieldNumber]
+            if (value <= 0) {
+                throw new Error('Invalide age field')
+            }
+        })
+
+        fieldsString.forEach(fieldString => {
+            const value = this[fieldString]
+
+            if (typeof value !== 'string' || value.length === 0) {
+                throw new Error('Invalide name field')
+            }
+        })
+    }
 
 }
 

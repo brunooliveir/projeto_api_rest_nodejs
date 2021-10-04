@@ -6,17 +6,29 @@ const Clients = require('./clients/Clients')
 
 //Cadastro e consulta de cidades
 router.post('/cities', async(request, response) => {
-    const dataReceived = request.body
-    const cities = new Cities(dataReceived)
-    await cities.create()
-    response.send(
-        JSON.stringify(cities)
-    )
+    try {
+        const dataReceived = request.body
+        const cities = new Cities(dataReceived)
+        await cities.create()
+        response.status(201)
+        response.send(
+            JSON.stringify(cities)
+        )
+    } catch (error) {
+        response.status(400)
+        response.send(
+            JSON.stringify({
+                message: error.message
+            })
+        )
+    }
 })
+
 
 
 router.get('/cities', async(request, response) => {
     const result = await tableCities.list()
+    response.status(200)
     response.send(
         JSON.stringify(result)
     )
@@ -28,10 +40,12 @@ router.get('/cities/name=:name', async(request, response) => {
         const name = request.params.name
         const cities = new Cities({ name: name })
         await cities.loadWithName()
+        response.status(200)
         response.send(
             JSON.stringify(cities)
         )
     } catch (error) {
+        response.status(404)
         response.send(
             JSON.stringify({
                 message: error.message
@@ -45,10 +59,12 @@ router.get('/cities/state=:state', async(request, response) => {
         const state = request.params.state
         const cities = new Cities({ state: state })
         await cities.loadWithState()
+        response.status(200)
         response.send(
             JSON.stringify(cities)
         )
     } catch (error) {
+        response.status(404)
         response.send(
             JSON.stringify({
                 message: error.message
@@ -61,12 +77,59 @@ router.get('/cities/state=:state', async(request, response) => {
 //Cadastro, consulta, modificacao e remocao de clientes 
 
 router.post('/clients', async(request, response) => {
-    const dataReceived = request.body
-    const clients = new Clients(dataReceived)
-    await clients.create()
-    response.send(
-        JSON.stringify(clients)
-    )
+    try {
+        const dataReceived = request.body
+        const clients = new Clients(dataReceived)
+        await clients.create()
+        response.status(201)
+        response.send(
+            JSON.stringify(clients)
+        )
+    } catch (error) {
+        response.status(400)
+        response.send(
+            JSON.stringify({
+                message: error.message
+            })
+        )
+    }
+})
+
+router.patch('/clients/:id', async(request, response) => {
+    try {
+        const id = request.params.id
+        const dataReceived = request.body
+        const data = Object.assign({}, dataReceived, { id: id })
+        const client = new Clients(data)
+        await client.changeName()
+        response.status(204)
+        response.end()
+    } catch (error) {
+        response.status(400)
+        response.send(
+            JSON.stringify({
+                message: error.message
+            })
+        )
+    }
+})
+
+router.delete('/clients/:id', async(request, response) => {
+    try {
+        const id = request.params.id
+        const client = new Clients({ id: id })
+        await client.loadWithId()
+        await client.removeClient()
+        response.status(204)
+        response.end()
+    } catch (error) {
+        response.status(404)
+        response.send(
+            JSON.stringify({
+                message: error.message
+            })
+        )
+    }
 })
 
 router.get('/clients', async(request, response) => {

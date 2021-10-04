@@ -11,6 +11,7 @@ class Cities {
     }
 
     async create() {
+        this.validate()
         const result = await tableCities.insert({
             name: this.name,
             state: this.state
@@ -41,6 +42,19 @@ class Cities {
         this.updatedAt = finded.updatedAt
         this.version = finded.version
     }
+
+    validate() {
+        const fields = ['name', 'state']
+
+        fields.forEach(field => {
+            const value = this[field]
+
+            if (typeof value !== 'string' || value.length === 0) {
+                throw new Error('Invalide field')
+            }
+        })
+    }
+
 }
 
 
