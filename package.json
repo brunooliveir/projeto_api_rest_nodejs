@@ -1,0 +1,25 @@
+{
+    "name": "projeto_api_rest_nodejs",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/brunooliveir/projeto_api_rest_nodejs.git"
+    },
+    "author": "bruno de oliveira",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/brunooliveir/projeto_api_rest_nodejs/issues"
+    },
+    "homepage": "https://github.com/brunooliveir/projeto_api_rest_nodejs#readme",
+    "dependencies": {
+        "config": "3.3.6",
+        "express": "4.17.1",
+        "mysql2": "2.3.0",
+        "sequelize": "6.6.5"
+    }
+}
