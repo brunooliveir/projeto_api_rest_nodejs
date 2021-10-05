@@ -19,11 +19,21 @@ class Clients {
             full_name: this.full_name,
             gender: this.gender,
             date_of_birth: this.date_of_birth,
-            age: this.age,
             city: this.city
         })
 
         this.id = result.id
+
+        //calculo da idade
+        if (result.createdAt.getDate() >= result.date_of_birth.getDate()) { // 03 > 02
+            if (result.createdAt.getMonth() >= result.date_of_birth.getMonth()) {
+                this.age = result.createdAt.getFullYear() - result.date_of_birth.getFullYear()
+            }
+        } else {
+            this.age = result.createdAt.getFullYear() - (result.date_of_birth.getFullYear() + 1)
+        }
+
+
         this.createdAt = result.createdAt
         this.updatedAt = result.updatedAt
         this.version = result.version
@@ -64,6 +74,8 @@ class Clients {
     async removeClient() {
         return tableClients.removeClient(this.id)
     }
+
+
 
     validate() {
         const fieldsString = ['full_name']

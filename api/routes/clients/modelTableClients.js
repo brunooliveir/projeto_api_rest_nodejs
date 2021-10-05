@@ -16,7 +16,7 @@ const colums = {
     },
     age: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: true
     },
     city: {
         type: Sequelize.INTEGER,

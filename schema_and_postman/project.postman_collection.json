@@ -41,7 +41,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"full_name\": \"alex brito\",\r\n    \"gender\": \"Masculino\",\r\n    \"date_of_birth\": \"2000-01-01\",\r\n    \"age\": \"20\",\r\n    \"city\": \"1\"\r\n}\r\n",
+					"raw": "{\r\n    \"full_name\": \"alex brito\",\r\n    \"gender\": \"Masculino\",\r\n    \"date_of_birth\": \"2000-01-01\",\r\n    \"city\": \"1\"\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
